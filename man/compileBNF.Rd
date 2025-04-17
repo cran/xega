@@ -21,7 +21,7 @@ A grammar object (list) with the attributes
 }
 \description{
 \code{compileBNF()} produces a context-free grammar
-              from its specification of in Backus-Naur form (BNF).
+              from its specification in Backus-Naur form (BNF).
               Warning: No error checking implemented.
 }
 \details{

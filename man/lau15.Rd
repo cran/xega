@@ -5,7 +5,7 @@
 \alias{lau15}
 \title{The problem environment lau15}
 \format{
-An object of class \code{list} of length 12.
+An object of class \code{list} of length 14.
 }
 \usage{
 lau15
@@ -27,8 +27,8 @@ Springer, 1986.
 \seealso{
 Other Problem Environment: 
 \code{\link{NewEnvXOR}()},
-\code{\link{Parabola2DEarly}},
-\code{\link{Parabola2D}}
+\code{\link{Parabola2D}},
+\code{\link{Parabola2DEarly}}
 }
 \concept{Problem Environment}
 \keyword{datasets}

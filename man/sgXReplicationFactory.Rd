@@ -2,13 +2,13 @@
 % Please edit documentation in R/sgXReplicationFactory.R
 \name{sgXReplicationFactory}
 \alias{sgXReplicationFactory}
-\title{Factory for configuring a gene dependent Replication function.}
+\title{Factory for configuring a gene-dependent Replication function.}
 \usage{
 sgXReplicationFactory(algorithm = "sga", method = "Kid1")
 }
 \arguments{
 \item{algorithm}{Algorithm. 
-Available: "sga", "sgde", "sgperm", "sge", sgp". 
+Available: "sga", "sgde", "sgperm", "sge", "sgede", sgp". 
 Default: "sga".}
 
 \item{method}{Method. 
@@ -17,7 +17,7 @@ Default: "sga".}
   \itemize{
    \item "sga", "sgperm", "sge", sgp": 
       "Kid1", "Kid2".
-   \item "sgde": 
+   \item "sgde", "sgede": 
       "DE".
 }}
 }
@@ -25,7 +25,7 @@ Default: "sga".}
 A replication function for the algorithm from the correct package.
 }
 \description{
-Factory for configuring a gene dependent Replication function.
+Factory for configuring a gene-dependent Replication function.
 }
 \examples{
 sgXReplicationFactory(algorithm="sgp", method="Kid1")

@@ -8,7 +8,7 @@
 #' About this version.
 #'
 #' @param verbose  Boolean. If \code{TRUE} (Default), print 
-#'                 package information and version number to console.
+#'                 package information and version number to the console.
 #'
 #' @return Version number (invisible).
 #'
@@ -17,9 +17,9 @@
 #' @export
 xegaVersion<-function(verbose=TRUE)
 {
-        version<-"0.9.0.0"
+        version<-"0.9.0.8"
         if (verbose)
-	{cat('Package xega. Version', version, 'As of 2024/03/15 \n')
+	{cat('Package xega. Version', version, 'As of 2025/04/16 \n')
 	cat('(c) Andreas Geyer-Schulz\n')}
         invisible(version)
 

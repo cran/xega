@@ -1,0 +1,51 @@
+-------------------------------------------------------------------------
+  xega                                                              News
+-------------------------------------------------------------------------
+
+Version 0.9.0.1 (2024-07-10)
+
+- Documentation corrected.
+- Option "MultiCoreHet" for parameter executionmodel added.
+- Option "ClusterHet" for parameter executionmodel added.
+- Option "FutureApplyHet" for parameter executionmodel added.
+
+Version 0.9.0.2 (2024-08-19)
+
+- TerminationFactory integrated with consistency checks.
+- Loop for repeated evaluation and aggregation of stochastic functions 
+  integrated (parameter evalrep). 
+
+Version 0.9.0.3 (2024-10-01)
+
+- Option "PAC" for parameter terminationCondition added.
+- Parameters PACdelta and fSpace added for PAC termination condition.
+ 
+Version 0.9.0.4 (2025-02-13)
+
+- Parameter worstFitness added.
+- Parameter terminationThreshold added.
+- Parameter decoder added. 
+
+Version 0.9.0.5 (2025-03-07)
+
+- Filenames of log-file and result-file added to result.
+
+Version 0.9.0.6 (2025-03-09)
+
+- initgene option added. For "sgp", two methods: "InitGene" and "InitGeneGe".
+
+Version 0.9.0.7 (2025-04-08)
+
+- Exclusive filenames for creating logs and result files avoids conflicts 
+  in file access on parallel/distributed systems (in xegaRun).
+
+Version 0.9.0.8 (2025-04-14)
+
+- xegaRun: algorithm="sgede" 
+   Grammatical evolution with differential evolution operators. 
+
+- sgX factory functions extended for "sgede". 
+
+- NewEnvXOR: Dependency on gene representation removed.
+             Can be optimized by "sgp", "sge" and "sgede".
+

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgXInitFactory.R
 \name{sgXInitGeneFactory}
 \alias{sgXInitGeneFactory}
-\title{Factory for configuring a gene dependent InitGene function.}
+\title{Factory for configuring a gene-dependent InitGene function.}
 \usage{
 sgXInitGeneFactory(algorithm = "sga", method = "InitGene")
 }
@@ -11,13 +11,14 @@ sgXInitGeneFactory(algorithm = "sga", method = "InitGene")
 Available: "sga", "sgde", "sgperm", "sge", sgp". 
 Default: "sga".}
 
-\item{method}{Method. Default: "InitGene".}
+\item{method}{Method. Default: "InitGene".
+For sgp, method = "InitGene" or "InitGeneGe".}
 }
 \value{
 InitGene function from the correct package.
 }
 \description{
-Factory for configuring a gene dependent InitGene function.
+Factory for configuring a gene-dependent InitGene function.
 }
 \examples{
 sgXInitGeneFactory(algorithm="sgperm")

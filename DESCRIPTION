@@ -1,6 +1,6 @@
 Package: xega
 Title: Extended Evolutionary and Genetic Algorithms
-Version: 0.9.0.0
+Version: 0.9.0.8
 Authors@R: 
     person(given = "Andreas",
            family = "Geyer-Schulz",
@@ -21,22 +21,22 @@ Description:
         (Ryan, C., O'Neill, M., and Collins, J. J. (2018) <doi:10.1007/978-3-319-78717-6>).
         All algorithms reuse basic adaptive mechanisms for performance optimization.
         Sequential or parallel execution (on multi-core machines, 
-        local clusters, and high performance computing environments) 
+        local clusters, and high-performance computing environments) 
         is available for all algorithms. See 
         <https://github.com/ageyerschulz/xega/tree/main/examples/executionModel>.
 License: MIT + file LICENSE
-URL: <https://github.com/ageyerschulz/xega>
+URL: https://github.com/ageyerschulz/xega
 Encoding: UTF-8
-RoxygenNote: 7.2.3
-Depends: R (>= 3.5.0), parallelly
+RoxygenNote: 7.3.2
+Depends: R (>= 3.5.0), parallelly, filelock
 Imports: xegaSelectGene, xegaBNF, xegaDerivationTrees, xegaGaGene,
         xegaGpGene, xegaGeGene, xegaDfGene, xegaPermGene,
         xegaPopulation
 Suggests: testthat (>= 3.0.0)
 NeedsCompilation: no
-Packaged: 2024-03-19 10:25:55 UTC; dj2333
+Packaged: 2025-04-16 10:14:22 UTC; dj2333
 Author: Andreas Geyer-Schulz [aut, cre]
     (<https://orcid.org/0009-0000-5237-3579>)
 Maintainer: Andreas Geyer-Schulz <Andreas.Geyer-Schulz@kit.edu>
 Repository: CRAN
-Date/Publication: 2024-03-20 09:00:02 UTC
+Date/Publication: 2025-04-17 23:10:02 UTC

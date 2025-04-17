@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgXGeneMapFactory.R
 \name{sgXGeneMapFactory}
 \alias{sgXGeneMapFactory}
-\title{Factory for configuring a gene dependent geneMap function.}
+\title{Factory for configuring a gene-dependent geneMap function.}
 \usage{
 sgXGeneMapFactory(algorithm = "sga", method = "Bin2Dec")
 }
@@ -31,6 +31,7 @@ Methods available for the different algorithms are:
     \item "sgp": "Identity". The gene map function is not used in 
                                 the decoder.
     \item "sge": "Mod" or "Bucket".
+    \item "sgede": "Identity".
  }
 }
 \examples{

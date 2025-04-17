@@ -8,7 +8,7 @@ xegaVersion(verbose = TRUE)
 }
 \arguments{
 \item{verbose}{Boolean. If \code{TRUE} (Default), print 
-package information and version number to console.}
+package information and version number to the console.}
 }
 \value{
 Version number (invisible).

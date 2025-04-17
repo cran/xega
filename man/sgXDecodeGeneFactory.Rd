@@ -2,12 +2,13 @@
 % Please edit documentation in R/sgXDecodeFactory.R
 \name{sgXDecodeGeneFactory}
 \alias{sgXDecodeGeneFactory}
-\title{Factory for configuring a gene dependent DecodeGene function.}
+\title{Factory for configuring a gene-dependent DecodeGene function.}
 \usage{
 sgXDecodeGeneFactory(algorithm = "sga", method = "DecodeGene")
 }
 \arguments{
-\item{algorithm}{"sga", "sgde", "sgperm", "sge", sgp". Default: "sga".}
+\item{algorithm}{"sga", "sgde", "sgperm", "sge", "sgede", 
+"sgp". Default: "sga".}
 
 \item{method}{Method. Default: "DecodeGene".}
 }
@@ -15,7 +16,7 @@ sgXDecodeGeneFactory(algorithm = "sga", method = "DecodeGene")
 Decode function for the selected algorithm from the correct package.
 }
 \description{
-A gene specific decoder must be provided.
+A gene-specific decoder must be provided.
 }
 \examples{
 sgXDecodeGeneFactory(algorithm="sgperm", method="DecodeGene")

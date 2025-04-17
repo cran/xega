@@ -2,6 +2,7 @@
 % Please edit documentation in R/xega-package.R
 \docType{package}
 \name{xega}
+\alias{xega-package}
 \alias{xega}
 \title{Package xega}
 \description{
@@ -13,34 +14,43 @@ The main program of the e(x)tended (e)volutionary and  (g)enetic (a)lgorithm
 
 \enumerate{ 
   \item \strong{Top-level main programs}
-        (Package \code{xega}): 
-        \code{RunGA()}, \code{ReRun()}
-  \item \strong{Population level operations - independent of representation}
-        (Package \code{xegaPopulation}):
+        (Package \code{xega} <https://CRAN.R-project.org/package=xega>): 
+        \code{xegaRun()}, \code{xegaReRun()}
+  \item \strong{Population-level operations - independent of representation}
+        (Package \code{xegaPopulation}
+         <https://CRAN.R-project.org/package=xegaPopulation>):
         The population layer consists of functions for initializing,
         logging, observing, evaluating a population of genes,
-        as well as of computing the next population.
-  \item \strong{Gene level operations - representation-dependent}.
+        as well as computing the next population.
+  \item \strong{Gene-level operations - representation-dependent}.
         \enumerate{
         \item 
-        \strong{Binary representation} (Package \code{xegaGaGene}):
+        \strong{Binary representation} 
+        (Package \code{xegaGaGene} 
+         <https://CRAN.R-project.org/package=xegaGaGene>):
         Initialization of random binary genes, 
         several gene maps for binary genes, 
         several mutation operators, 
         several crossover operators with 1 and 2 kids, 
         replication pipelines for 1 and 2 kids, 
         and, last but not least, function factories for configuration. 
-        \item \strong{Real-coded genes} (Package \code{xegaDfGene}).
-        \item \strong{Permutation genes} (Package \code{xegaPermGene}).
-        \item \strong{Derivation-tree genes} (Package \code{xegaGpGene}).
+        \item \strong{Real-coded genes} 
+              (Package \code{xegaDfGene}
+               <https://CRAN.R-project.org/package=xegaDfGene>).
+        \item \strong{Permutation genes} (Package \code{xegaPermGene}
+               <https://CRAN.R-project.org/package=xegaPermGene>).
+        \item \strong{Derivation-tree genes} (Package \code{xegaGpGene}
+               <https://CRAN.project.org/package=xegaGpGene>).
         \item \strong{Binary genes with a grammar-driven decoder}
-        (Package \code{xegaGeGene}). 
+        (Package \code{xegaGeGene} 
+               <https://CRAN.project.org/package=xegaGeGene>).
         }
-  \item \strong{Gene level operations - independent of representation}
-        (Package \code{selectGene}):
+  \item \strong{Gene-level operations - independent of representation}
+        (Package \code{xegaSelectGene}
+               <https://CRAN.project.org/package=xegaSelectGene>).
         Functions for static and adaptive fitness scaling,  
-        gene selection, and gene evaluation
-        as well as for the measurement of performance and for configuration.
+        gene selection, gene evaluation,
+        as well as measuring performance and configuration.
         }
 }
 
@@ -56,11 +66,12 @@ termination.
 \section{Parallel and Distributed Execution}{
 
 
-Parallel and distributed execution is supported for
-several combinations of hard- and software architectures
-by overloading the \code{lapply()}-function used in the 
-evaluation of a fitness function for a population of genes
-with a parallel version with the abstract interface:
+Several implementations of a parallel \code{lapply()} function 
+are provided. They support
+the parallel and distributed execution of fitness functions
+on several combinations of hard- and software architectures.
+A parallel \code{lapply()}-function 
+must have the following abstract interface:
  
 \code{parallelApply(pop, EvalGene, lF)}
 
@@ -72,7 +83,7 @@ The several implementations of a \code{parallelApply()} function
 are provided. The implementations use
 
 \itemize{
-\item the function \code{parallel::mclapply()} for multicore 
+\item the function \code{parallel::mclapply()} for multi-core 
       parallelization by the fork mechanism of Unix-based operating systems 
       on a single machine.
 \item the function \code{parallel::parLapply()} for socket connections
@@ -83,7 +94,7 @@ are provided. The implementations use
 
 In addition, user-defined parallel apply functions can be provided.
 Example scripts for using the \code{Rmpi::mpi.parLapply()} function
-of the \code{Rmpi} package are provided for a HPC environment with Slurm
+of the \code{Rmpi} package are provided for an HPC environment with Slurm
 as well as on a notebook.
 }
 
@@ -103,41 +114,41 @@ The user interface layer (package \code{xega}
 ) provides a function call interface and configuration support
 for several algorithms: genetic algorithms (sga), 
 permutation-based genetic algorithms (sgPerm), 
-derivation free algorithms as e.g. differential evolution (sgde), 
-grammar-based genetic programming (sgp) and grammatical evolution
+derivation-free algorithms as e.g. differential evolution (sgde), 
+grammar-based genetic programming (sgp), and grammatical evolution
 (sge). 
 
 \item
 The population layer (package \code{xegaPopulation}
 <https://CRAN.R-project.org/package=xegaPopulation> 
 ) contains
-population related functionality as well as support for 
+population-related functionality as well as support for 
 population statistics dependent adaptive mechanisms and 
 for parallelization.
 
 \item 
-The gene layer is split in a representation independent and 
-a representation dependent part:
+The gene layer is split into a representation-independent and 
+a representation-dependent part:
 \enumerate{
 \item 
- The representation indendent part 
+ The representation-independent part 
  (package \code{xegaSelectGene}
 <https://CRAN.R-project.org/package=xegaSelectGene> 
  )
  is responsible for variants of selection operators, evaluation 
  strategies for genes, as well as profiling and timing capabilities.        
 \item 
- The representation dependent part consists of the following packages: 
+ The representation-dependent part consists of the following packages: 
 \itemize{
 \item \code{xegaGaGene} 
 <https://CRAN.R-project.org/package=xegaGaGene> 
-for binary coded genetic algorithms.
+for binary-coded genetic algorithms.
 \item \code{xegaPermGene} 
 <https://CRAN.R-project.org/package=xegaPermGene> 
 for permutation-based genetic algorithms.
 \item \code{xegaDfGene} 
 <https://CRAN.R-project.org/package=xegaDfGene> 
-for derivation free algorithms as e.g. 
+for derivation-free algorithms e.g. 
                         differential evolution.
 \item \code{xegaGpGene} 
 <https://CRAN.R-project.org/package=xegaGpGene> 
@@ -176,6 +187,13 @@ an abstract data type for derivation trees.
  From CRAN by \code{install.packages('xega')}
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ageyerschulz/xega}
+}
+
+}
 \author{
 Andreas Geyer-Schulz
 }

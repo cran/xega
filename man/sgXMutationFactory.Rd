@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgXMutationFactory.R
 \name{sgXMutationFactory}
 \alias{sgXMutationFactory}
-\title{Factory for configuring a gene dependent Mutation function.}
+\title{Factory for configuring a gene-dependent Mutation function.}
 \usage{
 sgXMutationFactory(algorithm = "sga", method = "MutateGene")
 }
@@ -14,13 +14,13 @@ Default: "sga".}
 \item{method}{Method. Available methods are package-dependent.}
 }
 \value{
-MutateGene Function for the selected  algorithm 
+MutateGene  function for the selected  algorithm 
                     from the correct package.
 }
 \description{
 \code{sgXMutationFactory()} selects 
              \enumerate{
-             \item the algorithm specific crossover factory and 
+             \item the algorithm-specific mutation factory and 
              \item the method in this factory. 
              }
 }
@@ -29,9 +29,10 @@ The available methods for each factory are:
    \itemize{
     \item "sga": "MutateGene", "IVM".
     \item "sge": "MutateGene", "IVM".
-    \item "sgp": "MutateGene".
-    \item "sgde": "MutateGeneDE".
-    \item "sgperm": "MutateGeneOrderBased", 
+    \item "sgp": "MutateGene", "MutateAllGene", "MutateFilterGene".
+    \item "sgede": "MutateGene", "MutateGeneDE".
+    \item "sgde": "MutateGene", "MutateGeneDE".
+    \item "sgperm": "MutateGene", "MutateGeneOrderBased", 
           "MutateGenekInversion", "MutateGene2Opt", "MutateGenekOptLK",
           "MutateGeneGreedy", "MutateGeneBestGreedy", "MutateGeneMix".
  }
