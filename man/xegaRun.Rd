@@ -84,11 +84,13 @@ xegaRun(
   PACdelta = 0.01,
   fSpace = "Hilbert",
   cores = NA,
+  pipeline = FALSE,
   executionModel = "Sequential",
   uParApply = NULL,
   Cluster = NULL,
   profile = FALSE,
   batch = FALSE,
+  anytime = FALSE,
   path = ".",
   semantics = "byValue"
 )
@@ -406,9 +408,28 @@ and  \code{xegaPermMutateGeneOptLK}.}
 
 \item{scalefactor}{Method for setting scale factor (\code{"sgde"}):
 \itemize{
-\item "Const":  Constant scale factor. 
+\item "Const":  Constant scale factor configured by
+       \code{scalefactor1}.
 \item "Uniform": A random scale factor in the interval 
        from \code{0.000001} to \code{1.0}.
+\item "DERSF": A random scale factor in the interval 
+       from \code{0.5} to \code{1.0}.
+\item "DETVSF": The scale factor is linear 
+      decaying from an upper bound 
+      (\code{scalefactor1==0.9}) to a lower bound 
+      (\code{scalefactor2==0.2}) with the 
+      number of \code{generations}.
+\item "CauchySF": Bounded 
+      Cauchy distributed scale factor 
+      with a scale parameter which increases
+      with the number of \code{generations}.
+\item "FBSASF": Fitness based self adaptive 
+      scale factor.
+\item "RGSF": Random Gaussian 
+      scale factor (Random pick of a random 
+      number from either  
+      \code{abs(rnorm(1, 0.3, 0.3))} or
+      \code{abs(rnorm(1, 0.7, 0.3))}.
  }}
 
 \item{cutoffFit}{Cutoff for fitness.      Default: \code{0.5}. 
@@ -499,13 +520,33 @@ and  \code{xegaPermMutateGeneOptLK}.}
        }
                    }}
 
-\item{replication}{"Kid1" or "Kid2". Default: "Kid1".
+\item{replication}{"Kid1", "Kid1Pipeline", "Kid2" or 
+                   "Kid2Pipeline". Default: "Kid1".
                    For algorithms "sga", "sgPerm", "sgp", and "sge":
-                   "Kid1" means a crossover operator with one kid,
+                   "Kid1" means a crossover operator with one kid.
+                   "Kid1Pipeline" means a function closure 
+                    with a genetic operator pipeline is returned.
                    "Kid2" means a crossover operator with two kids.
+                   "Kid2Pipeline" means a function closure 
+                    with a genetic operator pipeline is returned.
                     
-                    For algorithm "sgde", \code{replication} must be 
-                    set to "DE".
+                    For algorithms "sgde" and "sgede", 
+                    \code{replication} must be 
+                    set to "DE" or "DEPipeline". 
+
+                    The pipeline version of replication 
+                    requires to set \code{pipeline=TRUE} too.
+
+                   The pipeline versions of replication 
+                   generate a genetic operator pipeline 
+                   as a function closure.
+                   The execution of the function closures 
+                   is shifted to the evaluation step and, thus, can 
+                   be parallelized.
+
+                   When genetic operator pipelines are used,
+                   the population vector cycles between function 
+                   elements and named lists as elements.
 
                    Used as the \code{method} argument of the 
                    function factory \code{sgXReplicationFactory} 
@@ -783,6 +824,10 @@ to decrease their survival rate into the next generation.}
 is set by \code{parallelly:availableCores()} 
 if the execution model is "MultiCore" or "MultiCoreHet".}
 
+\item{pipeline}{Boolean.  If \code{TRUE}, the extended genetic machinery generates
+a population of genetic operator pipelines which can be 
+executed in parallel. Default: \code{FALSE}.}
+
 \item{executionModel}{Execution model of fitness function evaluation.
 Available:
 \itemize{
@@ -825,7 +870,11 @@ of the main components of genetic algorithms. Default: \code{FALSE}.}
 
 \item{batch}{Boolean.
 If \code{TRUE}, then save the result in the file
-\code{xegaResult<exclusive pattern>.rds}. Default: \code{FALSE}.}
+\code{path/xegaResult<exclusive pattern>.rds}. Default: \code{FALSE}.}
+
+\item{anytime}{Boolean.
+If \code{TRUE}, then save the current best result in the file
+\code{path/xegaAnyTimeResult.rds}. Default: \code{FALSE}.}
 
 \item{path}{Path. Default: \code{"."}.}
 
@@ -1103,6 +1152,8 @@ the acceptance rule \code{accept="Best"} means that the fitter gene out of a par
 \item For simulated annealing the acceptance rule \code{accept="Metropolis"} 
 means that the survival probability of a kid with a fitness
 worse than its parent decreases as the number of generations executed increases. 
+\item The evaluation of the operator pipeline can be shifted to the 
+      evaluation phase \code{pipeline=TRUE}. 
 }
 
 Proper configuration of the pipeline allows the configuration of new algorithm variants which mix elements
@@ -1252,26 +1303,39 @@ See package \code{xegaSelectGene} <https://CRAN.R-project.org/package=xegaSelect
 
 For genetic algorithms ("sga", "sgp", sgperm", and "sge") 
 in the replication process of a gene the crossover operator may 
-by configured to produce one new gene (\code{replication="Kid1"})  
-or two new genes (\code{replication="Kid2"}). The first version  
-loses genetic information in the crossover operation, whereas the second version 
+by configured to produce one new gene (\code{replication="Kid1"}
+or \code{replication="Kid1Pipeline"})  
+or two new genes (\code{replication="Kid2"} or 
+\code{replication="Kid2Pipeline"}). The first version  
+loses genetic information in the crossover operation, 
+whereas the second version 
 retains the genetic material in the population.
 There is a dependency between \code{replication} and \code{crossover}:
 \code{"Kid2"} requires a crossover operator which produces two kids.
 The replication method is configured by the function  
 \code{xegaGaReplicationFactory()} of package \code{xegaGaGene}.
 
-Note that only the function \code{xegaGaReplicateGene} of \code{xegaGaGene} 
-(configured with \code{replication="Kid1"}) implements a genetic operator pipeline
+Note that only the functions \code{xegaGaReplicateGene} 
+or \code{xegaGaReplicateGenePipeline} of \code{xegaGaGene} 
+(configured with \code{replication="Kid1"} or 
+with \code{replicate="Kid1Pipeline"} implement a genetic operator pipeline
 with an acceptance rule. 
 
 For differential evolution (algorithm "sgde") and grammatical evolution with 
-differential evolution operators (algorithm "sgede"), \code{replication="DE"} 
+differential evolution operators (algorithm "sgede"), 
+\code{replication="DE"} or \code{replication="DEPipeline"} 
 must be configured.
 The replication method for differential evolution is configured by the function  
 \code{xegaDfReplicationFactory()} of package \code{xegaDfGene}.
 It implements a configurable acceptance rule. For classic differential evolution, 
-use \code{accept="Best"}.
+use \code{accept="Best"}. 
+
+For the pipeline versions, add \code{pipeline=TRUE}. 
+
+The pipeline versions build function closures of genetic operator pipelines which
+are evaluated in the evaluation phase of the genetic algorithm. 
+This implies that the complete genetic mechanism except the selection of genes 
+can be parallelized.
 }
 
 \section{Crossover}{
@@ -1361,7 +1425,11 @@ fitness value of its parent and determines which of the two genes is passed
 into the next population.
 
 An acceptance rule is only executed as part of the genetic operator pipeline, if 
-\code{replicate="Kid1"} or \code{replicate="DE"}.
+\code{replicate="Kid1"}, 
+\code{replicate="Kid1Pipeline"}, 
+\code{replicate="Kid2Pipeline"}, 
+\code{replicate="DE"}.
+or \code{replicate="DEPipeline"}.
 
 Two classes of acceptance rules are provided: 
 \itemize{
@@ -1464,12 +1532,49 @@ evolution without gene repair this should be set to \code{FALSE}.
 See package \code{xegaSelectGene} <https://CRAN.R-project.org/package=xegaSelectGene>
 }
 
+\section{The Concept of Genetic Operator Pipelines}{
+
+
+In the gene life cycle, a gene is 
+\enumerate{
+  \item  modified by the genetic machinery and then 
+  \item  evaluated (expressed as a phenotype and 
+         its fitness measured with regard to an environment).
+  }   
+
+In the current version of \code{xegaRun()} the genetic operations 
+are evaluated sequentially, whereas the fitness evaluation can be 
+parallelized. The drawback of this is that for algorithms as e.g. 
+differential evolution is that in order to accept a modified gene in the 
+population, its performance has to be better than that of its parent.
+This implies that for such algorithms the sequential part dominates 
+the execution times and the benefits from parallelization remain marginal.
+
+Genetic operator pipelines are function closures which embed 
+a sequence of basic genetic operations. In \code{xegaRun()}, 
+by setting the option \code{pipeline=TRUE} together with 
+\code{replication} to one of "Kid1Pipeline", "Kid2Pipeline", or 
+"DEPipeline", the selected replication function performs a set 
+of random experiments to select the proper genes and based on their 
+results compiles a function closure which embeds the genetic operator 
+pipeline. These function closures are then executed in the evaluation  
+step. This mechanism shifts the actual computation of all genetic 
+operations but the selection of genes to the evaluation step.
+  
+The effect of genetic operator pipelines are
+\enumerate{
+\item moderate for seqential execution. The net effect depends on the relative cost 
+      of the compilation process to the evaluation process. By compiling minimal genetic 
+      operating pipelines, moderate savings are achieved. 
+\item potentially high for parallel and distributed execution. The net effect depends on the 
+      cost of the compilation process, the cost of communication and the cost of the evaluation process.
+      The compilation process usually shifts more than 90 percent of the computational load to the 
+      evaluation phase of the genetic algorithm (which can be parallelized).
+}
+}
+
 \section{Distributed and Parallel Processing}{
 
-
-The current scope of parallelization is the parallel evaluation of genes (the steps marked with (eval) in the 
-genetic operator pipeline. This strategy is less efficient for differential evolution and permutation-based genetic
-algorithms because of the embedding of repeated evaluations into genetic operators. 
 
 In general, distributed and parallel processing requires a sequence of three steps:  
 \enumerate{
@@ -1539,6 +1644,8 @@ See package \code{xegaPopulation}  <https://CRAN.R-project.org/package=xegaPopul
        into another directory. The existence of the directory specified by \code{path} is not checked.
        \code{batch=TRUE} combined with \code{verbose=TRUE} should be used in batch environments on 
        HPC environments.
+ \item \code{anytime=TRUE} writes the result object \code{path/xegaAnyTimeResult.rds} after each generation. 
+       Only the most recent result is available.
  }
 }
 
@@ -1555,12 +1662,19 @@ save on communication cost in multi-core processing.
 
 \examples{
 a<-xegaRun(penv=Parabola2D, generations=10, popsize=20, verbose=0)
-b<-xegaRun(penv=Parabola2D, algorithm="sga", generations=10, max=FALSE, 
+b<-xegaRun(penv=Parabola2D, algorithm="sga", 
+   generations=10, popsize=20, max=FALSE, 
+   replication="Kid2Pipeline", crossover="Cross2Gene", pipeline=TRUE,
    verbose=1, replay=5, profile=TRUE)
 c<-xegaRun(penv=Parabola2D, max=FALSE, algorithm="sgde", 
-   popsize=20, generations=50, 
+   popsize=20, generations=10, 
    mutation="MutateGeneDE", scalefactor="Uniform", crossover="UCrossGene", 
    genemap="Identity", replication="DE", 
+   selection="UniformP", mateselection="UniformP", accept="Best")
+c1<-xegaRun(penv=Parabola2D, max=FALSE, algorithm="sgde", 
+   popsize=20, generations=10, elitist=TRUE,
+   mutation="MutateGeneDE", scalefactor="Uniform", crossover="UCrossGene", 
+   genemap="Identity", replication="DEPipeline", pipeline=TRUE, 
    selection="UniformP", mateselection="UniformP", accept="Best")
 envXOR<-NewEnvXOR()
 BG<-compileBNF(booleanGrammar())
@@ -1575,8 +1689,23 @@ g<-xegaRun(penv=envXOR, grammar=BG, max=TRUE, algorithm="sgede",
    mutation="MutateGeneDE", scalefactor="Uniform", crossover="UCrossGene", 
    genemap="Identity", replication="DE", 
    selection="UniformP", mateselection="UniformP", accept="Best")
+g1<-xegaRun(penv=envXOR, grammar=BG, max=TRUE, algorithm="sgede",
+   popsize=20, generations=4, verbose=1, reportEvalErrors=FALSE,
+   mutation="MutateGeneDE", scalefactor="Uniform", crossover="UCrossGene",
+   genemap="Identity", replication="DEPipeline", pipeline=TRUE,
+   selection="UniformP", mateselection="UniformP", accept="Best")
 h<-xegaRun(penv=lau15, max=FALSE, algorithm="sgperm", 
+   popsize=20, generations=5, max2opt=20,
    genemap="Identity", mutation="MutateGeneMix")
+i<-xegaRun(penv=lau15, max=FALSE, algorithm="sgperm", 
+   popsize=20, generations=5, max2opt=20,
+   genemap="Identity",  mutation="MutateGeneMix", 
+   executionModel="Sequential", replication="Kid1Pipeline", pipeline=TRUE) 
+j<-xegaRun(penv=lau15, max=FALSE, algorithm="sgperm", 
+   popsize=20, generations=5, max2opt=20,
+   genemap="Identity",  mutation="MutateGeneMix", 
+   executionModel="Sequential", replication="Kid1Pipeline", pipeline=TRUE, verbose=1) 
+cat("t(s) h:", h$timer$tMainLoop, "i:", i$timer$tMainLoop, "j:", j$timer$tMainLoop, "\n")  
 
 }
 \seealso{

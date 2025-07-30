@@ -1,6 +1,6 @@
 Package: xega
 Title: Extended Evolutionary and Genetic Algorithms
-Version: 0.9.0.8
+Version: 0.9.0.12
 Authors@R: 
     person(given = "Andreas",
            family = "Geyer-Schulz",
@@ -34,9 +34,9 @@ Imports: xegaSelectGene, xegaBNF, xegaDerivationTrees, xegaGaGene,
         xegaPopulation
 Suggests: testthat (>= 3.0.0)
 NeedsCompilation: no
-Packaged: 2025-04-16 10:14:22 UTC; dj2333
-Author: Andreas Geyer-Schulz [aut, cre]
-    (<https://orcid.org/0009-0000-5237-3579>)
+Packaged: 2025-07-30 18:51:20 UTC; dj2333
+Author: Andreas Geyer-Schulz [aut, cre] (ORCID:
+    <https://orcid.org/0009-0000-5237-3579>)
 Maintainer: Andreas Geyer-Schulz <Andreas.Geyer-Schulz@kit.edu>
 Repository: CRAN
-Date/Publication: 2025-04-17 23:10:02 UTC
+Date/Publication: 2025-07-30 19:10:02 UTC

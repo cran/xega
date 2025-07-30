@@ -16,9 +16,9 @@ Default: "sga".}
                  Options are package-dependent:
   \itemize{
    \item "sga", "sgperm", "sge", sgp": 
-      "Kid1", "Kid2".
+      "Kid1", "KidPipeline", "Kid2".
    \item "sgde", "sgede": 
-      "DE".
+      "DE", "DEPipeline".
 }}
 }
 \value{
