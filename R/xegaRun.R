@@ -19,12 +19,12 @@
 #'                               derivation-tree genes.
 #'        \item \code{"sge"}:    Grammatical evolution (genetic algorithm 
 #'                               with binary genes and a grammar-driven
-#'                               decoder.
+#'                               decoder).
 #'        \item \code{"sgede"}:  Grammatical evolution (genetic algorithm 
 #'                               with real genes, genetic operators from 
 #'                               from differential evolution 
 #'                               and a grammar-driven
-#'                               decoder.
+#'                               decoder). 
 #'        }
 #'   
 #'       The choice of the algorithm determines the gene-dependent 
@@ -423,7 +423,7 @@
 #'            \tab Derivation Trees     \tab                              \tab                    \tab mincrossdepth, \cr
 #'            \tab                      \tab                              \tab                    \tab maxdepth, \cr
 #'            \tab                      \tab                              \tab                    \tab and maxtrials \cr
-#'  (1 kid)   \tab of Derivation Trees  \tab  xegaGpAllCrossGene()       \tab "CrossGene" \tab maxcrossdepth, \cr
+#'  (1 kid)   \tab of Derivation Trees  \tab  xegaGpAllCrossGene()       \tab "AllCrossGene" \tab maxcrossdepth, \cr
 #'            \tab                      \tab                              \tab            \tab maxdepth, \cr
 #'            \tab                      \tab                              \tab            \tab and maxtrials \cr
 #'            \tab of Depth-Filtered    \tab  xegaGpFilterCrossGene()    \tab "FilterCrossGene" \tab maxcrossdepth, \cr
@@ -885,7 +885,7 @@
 #'                      \code{xegaGpCrossGene} and \code{xegaGpCross2Gene}
 #'                     in package xegaGpGene. 
 #'
-#' @param crossover   Crossover method. Default: "CrossGene".
+#' @param crossover   Crossover method. Default: "Cross2Gene".
 #'                    The choice of crossover methods depends on the 
 #'                    setting of the argument \code{algorithm}.
 #'                    Used as the \code{method} argument in function factory
@@ -917,7 +917,7 @@
 #'                    \itemize{
 #'                    \item Crossover operators with 1 kid:
 #'                    \itemize{
-#'                    \item "CrossGene"  position-based one-point crossover. 
+#'                    \item "AllCrossGene"  position-based one-point crossover. 
 #'                    }
 #'                    \item Crossover operators with 2 kids:
 #'                    \itemize{
@@ -1551,6 +1551,8 @@
 #'         \item 
 #'         \code{$resfn}: File name of RDS-file with \code{result}. 
 #'                       Default: \code{NA}.
+#'         \item
+#'         \code{$xegaVersion}: xega version used.
 #'         }
 #'
 #' @family Main Program
@@ -2047,11 +2049,18 @@ if (anytime==TRUE)
 	       }
 	pop<-NextPopulation(pop, lF$ScalingFitness(fit, lF), lF)
         lF$cGeneration<-xegaSelectGene::parm(i)
+#
+#if (pipeline==TRUE) {
 #        cat("after next population\n")
 #        print(pop)
+#        l<-list()
+#        l$pop<-pop
+#        l$lF<-lF
+#        return(l)
+#}
 	popfit<-EvalPopulation(pop, lF)
-#        cat("after eval population\n")
-#        print(popfit)
+#       cat("after eval population\n")
+#       print(popfit)
 	pop<-popfit$pop
 	fit<-popfit$fit
 
@@ -2116,7 +2125,8 @@ tUsed<-mainLoopTimer()
                     GAenv=GAconfiguration$GAenv,
                     timer=timer, 
                     logfn=NA,
-                    resfn=NA)
+                    resfn=NA, 
+                    xegaVersion=xegaVersion(verbose=FALSE))
 
 if (lF$Verbose()==1)  {cat("\n")}
 

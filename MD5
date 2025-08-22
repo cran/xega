@@ -1,9 +1,9 @@
-652caacaeef2ae90ca8ca36343b9ed2f *DESCRIPTION
+d6aac1206bc59674afdca45286cea696 *DESCRIPTION
 6a90e6a672ceebf4b79189bd671d10de *LICENSE
 7a455144dd3267ccf2b042c39c121f0c *NAMESPACE
-4e22cc1a70b9a2205baf7939dc708fb9 *NEWS
+2de7059beecae0512c34e3baa40cdfc0 *NEWS
 e57358be6cb6daaa359300b26eaae7b9 *R/createExclusiveFile.R
-3569f3c1156bd410b6a4c0aa703e3d42 *R/sgXCrossoverFactory.R
+a4a7920567464994fde26bc817010ad8 *R/sgXCrossoverFactory.R
 f9bc5e0a5c4e39a9f44f10c73a4bba88 *R/sgXDecodeFactory.R
 4de55da368fdce0c09017be3c5fdb245 *R/sgXGeneMapFactory.R
 bfa996fcb05d9df9095533794de1e51c *R/sgXInitFactory.R
@@ -14,10 +14,10 @@ a812a384b7179172f476348b44eb0192 *R/sgpProblems.R
 e8efd11bf97b0d84d833d32f656d4bbd *R/xega-package.R
 6b8144b58778893b90d0a4556e4d4d55 *R/xegaCluster.R
 f5da9d85c9b68fb78d4e6b724afd4d0b *R/xegaPermProblems.R
-a29a6e601fd79e12576535ed52b5b983 *R/xegaRerun.R
+db2feed2582820f2cc47598e6d980f21 *R/xegaRerun.R
 f1cff9907edaa9783fedf83936334af8 *R/xegaResult.R
-71f4b264f3eac29672490ba315893bec *R/xegaRun.R
-b38966fd9ba82a936610cb8b421fd63a *R/xegaVersion.R
+c37988b545580162e74f12ea210cce4b *R/xegaRun.R
+54c3f8a2d4404c95ef5e7b0d134774c9 *R/xegaVersion.R
 be0f069d073a701e4d1a8e54ab8e0935 *README
 b0025dee97dfb68b174c8d700b9dba81 *man/NewEnvXOR.Rd
 5ed3518743e66f390c684624ab167274 *man/Parabola2D.Rd
@@ -26,7 +26,7 @@ ecf615a2222f1b8f42615e949721e4b4 *man/Parabola2DEarly.Rd
 af093767473560c1f545c2ab5764a348 *man/compileBNF.Rd
 4cafe4b7195e4a1fac4d418323a8e974 *man/createExclusiveFile.Rd
 4a01150b3f67f8f2c10d0ecc8ba2b51b *man/lau15.Rd
-50b2878c45b96cea90d42c0268f7a0a0 *man/sgXCrossoverFactory.Rd
+424e244849fba7b2d50c590b1b021071 *man/sgXCrossoverFactory.Rd
 d122a06ae546010deba4bb76d6c7af5b *man/sgXDecodeGeneFactory.Rd
 7f5a19296c9568c9f6f422b09a0e4532 *man/sgXGeneMapFactory.Rd
 28127765c3896c318c4c25b35a9b310c *man/sgXInitGeneFactory.Rd
@@ -34,8 +34,8 @@ a05a8aee3049d7110225c92c7c6ba9a2 *man/sgXMutationFactory.Rd
 16c20e28f2d65e11147d76b6dd07cd8b *man/sgXReplicationFactory.Rd
 140d5ee92c62ac2dd6c6a035e23ad499 *man/xega.Rd
 8df52aa2f497753ca9fc1a71de6c44d1 *man/xegaAnyTimeResult.Rd
-6dbe74b1c6950791964d383696e1e8e5 *man/xegaReRun.Rd
-7008dbbe072cce78ae0be2a9d8d03b13 *man/xegaRun.Rd
+9aacf505ec0f3db891b12017411fc53c *man/xegaReRun.Rd
+150cadf09e97353752e2fcada5bdcf8d *man/xegaRun.Rd
 b30d257e0207bdf33f480da63e3006bc *man/xegaVersion.Rd
 801805973caff3aa7b29c84071a132fb *tests/testthat.R
 1038c08fcf8d87caa42a4563c7792241 *tests/testthat/test-GeneMapFactory.R
@@ -45,4 +45,4 @@ c217bf53e7ddb4be597245f7de8a4433 *tests/testthat/test-ReplicationFactory.R
 8ae430a5c3da7c72d28a56cf552cc38a *tests/testthat/test-sgXInitFactory.R
 988a535398be81bf0dc6aaebaed36cea *tests/testthat/test-sgXMutationFactory.R
 b7aee5743c10544041a1d0edcf7d2916 *tests/testthat/test-sgpProblems.R
-88719128012401a15ed197b9372ec14b *tests/testthat/test-xega.R
+461a0dc552546f0bc3d1429a982804df *tests/testthat/test-xega.R

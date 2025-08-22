@@ -5,11 +5,17 @@
 \title{Run an evolutionary or genetic algorithm 
 with the same configuration as in the previous run.}
 \usage{
-xegaReRun(solution)
+xegaReRun(solution, script = FALSE, fn = "xegaRunScript")
 }
 \arguments{
 \item{solution}{The solution of a 
 previous run of \code{xegaRun()}.}
+
+\item{script}{Boolean. Default: FALSE. 
+If TRUE, write an R script to repeat the xega run
+with the command in the solution object.}
+
+\item{fn}{Filename of R script. Default: xegaRunScript.R}
 }
 \value{
 A list of 
@@ -45,7 +51,11 @@ A list of
 \code{xegaReRun()} runs a simple genetic algorithm with 
              the same configuration as in the run specified by the 
              list element \code{$GAconfig} of the solution of 
-             a simple genetic algorithm.
+             a simple genetic algorithm. The problem environment and the 
+             the grammar are extracted from the solution object.
+
+             If \code{script==TRUE}, the \code{solution} object and a R script 
+             to rerun xega are written to the current directory.
 }
 \details{
 \code{xegaReRun()} does not capture the configuration for 

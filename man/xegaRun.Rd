@@ -264,7 +264,7 @@ Default: 0.30.
 Argument of function factory 
 \code{CrossRateFactory} in package \code{xegaPopulation}.}
 
-\item{crossover}{Crossover method. Default: "CrossGene".
+\item{crossover}{Crossover method. Default: "Cross2Gene".
                    The choice of crossover methods depends on the 
                    setting of the argument \code{algorithm}.
                    Used as the \code{method} argument in function factory
@@ -296,7 +296,7 @@ Argument of function factory
                    \itemize{
                    \item Crossover operators with 1 kid:
                    \itemize{
-                   \item "CrossGene"  position-based one-point crossover. 
+                   \item "AllCrossGene"  position-based one-point crossover. 
                    }
                    \item Crossover operators with 2 kids:
                    \itemize{
@@ -934,6 +934,8 @@ Result object. A named list of
         \item 
         \code{$resfn}: File name of RDS-file with \code{result}. 
                       Default: \code{NA}.
+        \item
+        \code{$xegaVersion}: xega version used.
         }
 }
 \description{
@@ -948,12 +950,12 @@ Result object. A named list of
                               derivation-tree genes.
        \item \code{"sge"}:    Grammatical evolution (genetic algorithm 
                               with binary genes and a grammar-driven
-                              decoder.
+                              decoder).
        \item \code{"sgede"}:  Grammatical evolution (genetic algorithm 
                               with real genes, genetic operators from 
                               from differential evolution 
                               and a grammar-driven
-                              decoder.
+                              decoder). 
        }
   
       The choice of the algorithm determines the gene-dependent 
@@ -1367,7 +1369,7 @@ The table below summarizes the crossover operators available in the current vers
            \tab Derivation Trees     \tab                              \tab                    \tab mincrossdepth, \cr
            \tab                      \tab                              \tab                    \tab maxdepth, \cr
            \tab                      \tab                              \tab                    \tab and maxtrials \cr
- (1 kid)   \tab of Derivation Trees  \tab  xegaGpAllCrossGene()       \tab "CrossGene" \tab maxcrossdepth, \cr
+ (1 kid)   \tab of Derivation Trees  \tab  xegaGpAllCrossGene()       \tab "AllCrossGene" \tab maxcrossdepth, \cr
            \tab                      \tab                              \tab            \tab maxdepth, \cr
            \tab                      \tab                              \tab            \tab and maxtrials \cr
            \tab of Depth-Filtered    \tab  xegaGpFilterCrossGene()    \tab "FilterCrossGene" \tab maxcrossdepth, \cr

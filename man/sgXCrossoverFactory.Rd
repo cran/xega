@@ -39,7 +39,7 @@ The available methods for each algorithm are:
     \item "sgede": 
        "CrossGene", "UCrossGene", "UPCrossGene".
     \item "sgp": 
-       "CrossGene", "Cross2Gene", "AllCrossGene", "AllCross2Gene",
+       "Cross2Gene", "AllCrossGene", "AllCross2Gene",
        "FilterCrossGene", "FilterCross2Gene".
     \item "sgde": 
        "CrossGene", "UCrossGene", "UPCrossGene".

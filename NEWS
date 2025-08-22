@@ -77,3 +77,41 @@ Version 0.9.0.12 (2025-07-26)
   (DERSF, DETVSF, CauchySF, FBASF, RGSF)  
   for scale factors for differential evolution added.
 
+Version 0.9.0.13 (2025-08-17)
+
+- xegaRun: Variable GAconfig changed.
+
+- xegaReRun: 
+       Extract penv and grammar from solution object.
+       Output of R-script to repeat run.
+      
+Version 0.9.0.14 (2025-08-17)
+
+- Bug fix for pipelines with algorithm="sgp"
+  Rebuilt with package xegaGpGene 1.0.0.3
+ 
+Version 0.9.0.15 (2025-08-19)
+
+- Bug fix in xegaReRun: Call to xegaRun.
+- xegaRun: element xegaVersion added. 
+- Documentation sgXFactory corrected.
+- Documentation xegaRun corrected.
+   Crossover default is "Cross2Gene".
+   1 kid crossover: "AllCrossGene".
+
+Version 0.9.0.16 (2025-08-20)
+
+- Rebuilt with packages xegaGaGene 1.0.0.5 and 
+  xegaDfGene 1.0.0.6. Smaller function closures 
+  of genetic operator pipelines for less 
+  communication overhead in distributed settings.
+
+Version 0.9.0.17 (2025-08-21)
+
+- Rebuilt with package xegaDfGene 1.0.0.7. 
+  target gene and other genes in replication configurable
+  with different selection mechanisms.
+- Reference to Grammatical Differential Evolution added.
+
+  
+  
